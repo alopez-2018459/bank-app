@@ -22,7 +22,7 @@ const EditModal = ({ formFunction, title, description, redirectOnClose }: Props)
     defaultOpen={true}
     onOpenChange={() => router.replace(redirectOnClose)}
     >
-      <SheetContent side={'bottom'} className="">
+      <SheetContent>
         <SheetHeader>
           <SheetTitle className="text-violet-700">{title}</SheetTitle>
           <SheetDescription>
