@@ -43,7 +43,6 @@ export async function PUT(request: NextRequest, params: Params) {
   const data = await request.json();
 
   try {
-    const session = await getServerSession(authOptions);
 
     // Validate if the request body is empty
     if (Object.keys(data).length === 0) {

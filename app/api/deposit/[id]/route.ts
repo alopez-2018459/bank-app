@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, params: Params) {
 
     // Validate if the transfer was not found
     if (!deposit) {
-      return new NextResponse("Deposit not found", {
+      return new NextResponse(JSON.stringify({message: "Deposit not found"}), {
         status: 404,
       });
     }
@@ -42,7 +42,7 @@ export async function DELETE(request: Request, params: Params) {
 
     // Validate if the transfer was not found
     if (!deposit) {
-      return new NextResponse("Deposit not found", {
+      return new NextResponse(JSON.stringify({message: "Deposit not found"}), {
         status: 404,
       });
     }
@@ -60,8 +60,6 @@ export async function DELETE(request: Request, params: Params) {
         status: 400,
       });
     }
-
-    console.log({ERROR_NO_DEJA_PASAR: "LAKSJDASKD"})
 
     // Delete the transfer
     const deletedDeposit = await Deposit.findByIdAndDelete(id);

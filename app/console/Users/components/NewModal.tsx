@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import ProfileForm from "./UserForm";
+import UserForm from "./UserForm";
 import { useRouter } from "next/navigation";
 
 const NewModal = () => {
@@ -24,7 +24,7 @@ const NewModal = () => {
             This action will add a user to the system.
           </SheetDescription>
         </SheetHeader>
-        <ProfileForm />
+        <UserForm />
       </SheetContent>
     </Sheet>
   );

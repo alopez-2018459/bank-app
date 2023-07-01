@@ -5,6 +5,7 @@ import { BankAccount, IBankAccount } from "./BankAccount";
 export interface IDeposit extends Document {
   amount: number;
   account: string;
+  status: Boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,6 +25,10 @@ const DepositSchema = new Schema<IDeposit>(
     account: {
       type: String,
       required: [true, "Cuenta es requerida."],
+    },
+    status: {
+      type: Boolean,
+      default: true
     },
     createdAt: {
       type: Date,

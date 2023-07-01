@@ -1,9 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/app/db/connection";
-import { getServerSession } from "next-auth";
 import Deposit from "@/app/models/Deposit";
-import User from "@/app/models/User";
-import { authOptions } from "../auth/[...nextauth]/route";
 import { BankAccount } from "@/app/models/BankAccount";
 
 dbConnect();
@@ -14,18 +11,13 @@ export async function POST(request: NextRequest) {
     const json = await request.json();
     console.log({ DataRequest: json });
 
-    const accountExist = await BankAccount.findOne({ name: json.account });
-    
+    const accountExist = await BankAccount.findOne({ accNumber: json.account });
     console.log({ACCOUNT_EXIST: accountExist})
 
-    //Validate if the account number exists
     if (!accountExist) {
-      return new NextResponse(
-        JSON.stringify({ message: "El número de cuenta no existe SE NECESITA UN GET BY ACCOUNT" }),
-        {
-          status: 400,
-        }
-      );
+      return new NextResponse(JSON.stringify({ message: "El número de cuenta no existe" }), {
+        status: 404,
+      });
     }
 
     // Crear un nuevo objeto de cuenta bancaria con los datos parseados

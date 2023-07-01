@@ -41,16 +41,6 @@ export default function DepositForm() {
       body: JSON.stringify(values),
     });
 
-    if (res.status === 404) {
-      setError(true);
-      toast({
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     const obj = await res.json();
 
     if (!res.ok) {

@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import ProfileForm from "./DepositForm";
+import DepositForm from "./DepositForm";
 import { useRouter } from "next/navigation";
 
 const NewModal = () => {
@@ -24,7 +24,7 @@ const NewModal = () => {
             This action will add a deposit to the system.
           </SheetDescription>
         </SheetHeader>
-        <ProfileForm />
+        <DepositForm />
       </SheetContent>
     </Sheet>
   );
