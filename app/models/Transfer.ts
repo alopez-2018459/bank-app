@@ -6,6 +6,7 @@ export interface ITransfer extends Document {
   amount: number;
   senderAccount: string;
   receiverAccount: string;
+  status: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -29,6 +30,10 @@ const TransferSchema = new Schema<ITransfer>(
     receiverAccount: {
       type: String,
       required: [true, "Cuenta de destino es requerida."],
+    },
+    status: {
+      type: Boolean,
+      default: true,
     },
     createdAt: {
       type: Date,

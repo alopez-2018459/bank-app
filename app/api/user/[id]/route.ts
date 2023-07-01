@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/app/db/connection";
-import User from "@/app/models/User";
+import User, { IUser } from "@/app/models/User";
 import { getServerSession } from "next-auth";
 import AccountType from "@/app/models/AccountType";
 import { revalidateTag } from "next/cache";
@@ -52,21 +52,54 @@ export async function PUT(request: NextRequest, params: Params) {
       });
     }
 
-    const user = await User.findByIdAndUpdate(id, data, {
+    // Verificar si el nombre de usuario, el DPI o el email ya existen en otro usuario
+    const existingUser = await User.findOne({
+      $or: [
+        { username: data.username },
+        { dpi: data.dpi },
+        { email: data.email },
+      ],
+    });
+
+    // Obtener el usuario actual
+    const user = await User.findById(id);
+
+    // Verificar si el nombre de usuario ya existe
+    if (existingUser && existingUser.username !== user.username) {
+      return new NextResponse("Username already exists", {
+        status: 400,
+      });
+    }
+
+    // Verificar si el DPI ya existe
+    if (existingUser && existingUser.dpi !== user.dpi) {
+      return new NextResponse("DPI already exists", {
+        status: 400,
+      });
+    }
+
+    // Verificar si el email ya existe
+    if (existingUser && existingUser.email !== user.email) {
+      return new NextResponse("Email already exists", {
+        status: 400,
+      });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(id, data, {
       new: true,
     });
 
     // Validate if the user is not found
-    if (!user) {
+    if (!updatedUser) {
       return new NextResponse("User not found", {
         status: 404,
       });
     }
 
-    const tag = request.nextUrl.searchParams.get('User')
-    revalidateTag(tag as string)
+    const tag = request.nextUrl.searchParams.get("User");
+    revalidateTag(tag as string);
 
-    return new NextResponse(JSON.stringify(user), {
+    return new NextResponse(JSON.stringify(updatedUser), {
       status: 200,
     });
   } catch (err) {

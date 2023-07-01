@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, params: params) {
 
     // Validate if the bank account was not found
     if (!bankAccount) {
-      return new NextResponse("Account not found", {
+      return new NextResponse(JSON.stringify({ message: "Account not found" }), {
         status: 404,
       });
     }
@@ -52,7 +52,7 @@ export async function PUT(request: Request, params: params) {
     const session = await getServerSession(authOptions);
     // Verify if the user is authenticated and is an admin
     if (!session?.user || session.user.role !== "admin") {
-      return new NextResponse("Unauthorized", {
+      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
         status: 401,
       });
     }
@@ -63,7 +63,7 @@ export async function PUT(request: Request, params: params) {
 
     // Validate if the bank account was not found
     if (!bankAccount) {
-      return new NextResponse("Account not found", {
+      return new NextResponse(JSON.stringify({ message: "Account not found" }), {
         status: 404,
       });
     }
@@ -87,7 +87,7 @@ export async function DELETE(request: Request, params: params) {
     const session = await getServerSession(authOptions);
     // Verify if the user is authenticated and is an admin
     if (!session?.user || session.user.role !== "admin") {
-      return new NextResponse("Unauthorized", {
+      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
         status: 401,
       });
     }
@@ -96,7 +96,7 @@ export async function DELETE(request: Request, params: params) {
 
     // Validate if the bank account was not found
     if (!bankAccount) {
-      return new NextResponse("Account not found", {
+      return new NextResponse(JSON.stringify({ message: "Account not found" }), {
         status: 404,
       });
     }

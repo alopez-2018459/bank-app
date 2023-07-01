@@ -49,6 +49,7 @@ const userSchema = new Schema<IUser>(
     dpi: {
       type: String,
       required: true,
+      unique: true,
       minlength: 13,
       maxlength: 13,
     },
