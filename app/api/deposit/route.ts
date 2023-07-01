@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import Deposit from "@/app/models/Deposit";
 import User from "@/app/models/User";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { BankAccount } from "@/app/models/BankAccount";
 
 dbConnect();
 
@@ -12,6 +13,20 @@ export async function POST(request: NextRequest) {
     // Parsear el cuerpo de la solicitud como JSON
     const json = await request.json();
     console.log({ DataRequest: json });
+
+    const accountExist = await BankAccount.findOne({ name: json.account });
+    
+    console.log({ACCOUNT_EXIST: accountExist})
+
+    //Validate if the account number exists
+    if (!accountExist) {
+      return new NextResponse(
+        JSON.stringify({ message: "El número de cuenta no existe SE NECESITA UN GET BY ACCOUNT" }),
+        {
+          status: 400,
+        }
+      );
+    }
 
     // Crear un nuevo objeto de cuenta bancaria con los datos parseados
     const deposit = new Deposit(json);
@@ -39,14 +54,6 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    //const session = await getServerSession(authOptions);
-    // Verify if the user is authenticated and is an admin
-    /*if (!session?.user || session.user.role !== "admin") {
-      return new NextResponse("Unauthorized", {
-        status: 401,
-      });
-    }*/
-
     // Get all account types with related data
     const deposit = await Deposit.find();
     const data = deposit;

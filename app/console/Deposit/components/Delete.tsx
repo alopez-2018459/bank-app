@@ -49,7 +49,7 @@ const Delete = (props: Props) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            onClick={() => router.push("/console/Users")}
+            onClick={() => router.push("/console/Deposit")}
           >
             Cancel
           </AlertDialogCancel>

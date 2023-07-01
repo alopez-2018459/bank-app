@@ -24,7 +24,7 @@ export async function deleteBankAccount(_id: any) {
 }
 
 export async function getBankAccounts() {
-  const res = await fetch(`http://localhost:3000/api/bankAccount`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/bankAccount`, {
     method: "GET",
     cache: 'no-store',
   });
@@ -40,7 +40,7 @@ export async function getBankAccounts() {
 
 export async function getBankAccountById(_id: any) {
   try {
-    const res = await fetch(`http://localhost:3000/api/bankAccount/${_id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/bankAccount/${_id}`, {
       method: 'GET',
       cache: 'no-store',
     });
@@ -60,7 +60,7 @@ export async function getBankAccountById(_id: any) {
 
 export async function getAccountById(_id: any) {
   try {
-    const res = await fetch(`http://localhost:3000/api/accountType/${_id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/accountType/${_id}`, {
       method: 'GET',
       cache: 'no-store',
     });

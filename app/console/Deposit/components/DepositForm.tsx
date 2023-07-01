@@ -17,7 +17,7 @@ import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { depositFResolver, depositFType } from "./depositFSchema";
 
-export default function UserForm() {
+export default function DepositForm() {
   const router = useRouter();
 
   const { toast } = useToast();
@@ -76,48 +76,46 @@ export default function UserForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="amount"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="text-violet-800 font-semibold">
-                  Amount
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Amount" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is the deposit amount.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="account"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel className="text-violet-800 font-semibold">
-                  Account
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Account" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is the receiver account.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button
-            type="submit"
-            className="bg-violet-200 text-violet-700 hover:bg-violet-700 hover:text-white max-w-lg w-full"
-          >
-            Submit
-          </Button>
+        <FormField
+          control={form.control}
+          name="amount"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-violet-800 font-semibold">
+                Amount
+              </FormLabel>
+              <FormControl>
+                <Input placeholder="Amount" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is the deposit amount.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="account"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-violet-800 font-semibold">
+                Receiver Account
+              </FormLabel>
+              <FormControl>
+                <Input placeholder="Receiver Account" {...field} />
+              </FormControl>
+              <FormDescription>This is the receiver Account.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button
+          type="submit"
+          className="bg-violet-200 text-violet-700 hover:bg-violet-700 hover:text-white"
+        >
+          Submit
+        </Button>
       </form>
     </Form>
   );

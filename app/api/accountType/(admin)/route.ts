@@ -9,14 +9,6 @@ dbConnect();
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    // Verify if the user is authenticated and is an admin
-    /*if (!session?.user || session.user.role !== "admin") {
-      return new NextResponse("Unauthorized", {
-        status: 401,
-      });
-    }*/
-
     // Get all account types with related data
     const accountTypes = await AccountType.find();
     const data = accountTypes;
@@ -39,14 +31,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    // Verify if the user is authenticated and is an admin
-    /*if (!session?.user || session.user.role !== "admin") {
-      return new NextResponse("Unauthorized", {
-        status: 401,
-      });
-    }*/
-
     // Parse the request body as JSON
     const json = await request.json();
     console.log({ DataRequest: json });

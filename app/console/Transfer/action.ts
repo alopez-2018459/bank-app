@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 
 export async function deleteTransfer(_id: any) {
   try {
-    const res = await fetch(`http://localhost:3000/api/transfer/${_id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/transfer/${_id}`, {
       method: 'DELETE',
       next: { revalidate: 100 },
     });
@@ -21,7 +21,7 @@ export async function deleteTransfer(_id: any) {
 }
 
 export async function getTransfers() {
-  const res = await fetch(`http://localhost:3000/api/transfer`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/transfer`, {
     method: "GET",
     cache: 'no-store',
   });
@@ -37,7 +37,7 @@ export async function getTransfers() {
 
 export async function getTransferById(_id: any) {
   try {
-    const res = await fetch(`http://localhost:3000/api/transfer/${_id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/transfer/${_id}`, {
       method: 'GET',
       next: { revalidate: 100 },
     });

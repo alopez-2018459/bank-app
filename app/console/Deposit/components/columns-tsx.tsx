@@ -3,7 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BsClipboardPlus } from "react-icons/bs";
+import { useRouter } from "next/navigation";
+import { BsTrash2, BsClipboardPlus } from "react-icons/bs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,11 +22,11 @@ export const columns: ColumnDef<IDeposit>[] = [
   },
   {
     accessorKey: "account",
-    header: "Account Number",
+    header: "Account number",
   },
   {
     accessorKey: "amount",
-    header: "Deposit Amount",
+    header: "Deposit amount",
   },
   {
     accessorKey: "createdAt",
@@ -102,7 +103,8 @@ export const columns: ColumnDef<IDeposit>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const account = row.original;
+      const deposit = row.original;
+      const router = useRouter();
 
       return (
         <DropdownMenu>
@@ -119,9 +121,18 @@ export const columns: ColumnDef<IDeposit>[] = [
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(account._id)}
+              onClick={() => navigator.clipboard.writeText(deposit._id)}
             >
               <BsClipboardPlus className="mr-2" /> Copy ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() =>
+                router.replace(`/console/Deposit?delete=${deposit._id}`)
+              }
+              className="text-red-500"
+            >
+              <BsTrash2 className="mr-2" /> Delete deposit
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

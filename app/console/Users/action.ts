@@ -24,7 +24,7 @@ export async function deleteUser(_id: any) {
 }
 
 export async function getUsers() {
-  const res = await fetch(`http://localhost:3000/api/user`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
     method: "GET",
     cache: 'no-store',
   });
@@ -40,7 +40,7 @@ export async function getUsers() {
 
 export async function getUserById(_id: any) {
   try {
-    const res = await fetch(`http://localhost:3000/api/user/${_id}`, {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user/${_id}`, {
       method: 'GET',
       cache: 'no-store'
     });
