@@ -32,7 +32,7 @@ export default function UserForm() {
     defaultValues: {
       client: {_id: ""},
       currency: "",
-      balance: "",
+      balance: "0",
       accountType: {_id: ""}
     },
   });

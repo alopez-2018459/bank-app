@@ -43,11 +43,10 @@ export default function BankAccountEdit(defaultValues: Props) {
   const form = useForm<bankAccFType>({
     resolver: bankAccFResolver,
     defaultValues: {
-      accNumber: bankAccount.defaultValues.accNumber,
       //@ts-expect-error
       client: {_id: bankAccount.defaultValues.client?._id},
       currency: bankAccount.defaultValues.currency,
-      balance: bankAccount.defaultValues.balance,
+      balance: bankAccount.defaultValues.balance?.toString(),
       //@ts-expect-error
       accountType: {_id: bankAccount.defaultValues.accountType?._id},
     },
@@ -184,33 +183,12 @@ export default function BankAccountEdit(defaultValues: Props) {
             )}
           />
         </div>
-
-        <div className="w-full flex items-center justify-between gap-4">
-          <FormField
-            control={form.control}
-            name="accNumber"
-            render={({ field }) => (
-              <FormItem className="max-w-lg w-full">
-                <FormLabel className="text-violet-800 font-semibold">
-                  Account Number
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Account Number" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is the account number.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <Button
             type="submit"
             className="bg-violet-200 text-violet-700 hover:bg-violet-700 hover:text-white max-w-lg w-full"
           >
             Submit
           </Button>
-        </div>
       </form>
     </Form>
   );

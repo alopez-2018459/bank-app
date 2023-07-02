@@ -26,10 +26,6 @@ const DepositSchema = new Schema<IDeposit>(
       type: String,
       required: [true, "Cuenta es requerida."],
     },
-    status: {
-      type: Boolean,
-      default: true
-    },
     createdAt: {
       type: Date,
       default: Date.now,

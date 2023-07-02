@@ -22,7 +22,7 @@ const EditModal = ({ formFunction, title, description, redirectOnClose }: Props)
     defaultOpen={true}
     onOpenChange={() => router.replace(redirectOnClose)}
     >
-      <SheetContent>
+      <SheetContent  side={ title == "Edit User" ? 'bottom' : title == "Edit Bank Account" ? "bottom" : "right"} className={ title == "Edit User" ? "overflow-y-auto h-full" : ""}>
         <SheetHeader>
           <SheetTitle className="text-violet-700">{title}</SheetTitle>
           <SheetDescription>

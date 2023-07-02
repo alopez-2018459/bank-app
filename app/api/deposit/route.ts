@@ -20,6 +20,18 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    if(json.amount > 10000){
+      return new NextResponse(JSON.stringify({ message: "El monto máximo es de 10000" }), {
+        status: 404,
+      });
+    }
+
+    if(json.amount <= 0){
+      return new NextResponse(JSON.stringify({ message: "El monto debe ser mayor a 0" }), {
+        status: 404,
+      });
+    }
+
     // Crear un nuevo objeto de cuenta bancaria con los datos parseados
     const deposit = new Deposit(json);
     console.log({ DepositCreated: deposit });

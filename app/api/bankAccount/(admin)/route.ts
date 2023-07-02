@@ -46,17 +46,16 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    /*const session = await getServerSession(authOptions);
-    // Verify if the user is authenticated and is an admin
-    if (!session?.user || session.user.role !== "admin") {
-      return new NextResponse("Unauthorized", {
-        status: 401,
-      });
-    }*/
-
     // Parse the request body as JSON
     const json = await request.json();
     console.log({ DataRequest: json });
+
+    if (json.client._id == "" || json.accountType._id == "") {
+      return new NextResponse(
+        JSON.stringify({ message: "Account Type and Client are required" }),
+        { status: 400 }
+      );
+    }
 
     // Create a new bank account object with the parsed data
     const bankAccount = new BankAccount(json);
