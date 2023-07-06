@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const bankAccFSchema = z.object({
   client: z
     .object({
-      _id: z.string()
+      _id: z.string().min(2, { message: "Client invalid" })
     }),
   currency: z
     .enum(["USD", "GTQ", "EUR"], {
@@ -17,7 +17,7 @@ const bankAccFSchema = z.object({
     .regex(/^\d+$/),
   accountType: z
     .object({
-      _id: z.string()
+      _id: z.string().min(2, { message: "Account Type invalid" })
 
     }),
 });

@@ -11,16 +11,12 @@ interface Params {
 export async function GET(request: NextRequest, { params }: { params: Params }) {
   const { id } = params;
 
-  console.log({ACCOUNT_TYPE: id});
-
   try {
     const account = await AccountType.findOne({ name: id });
 
-    console.log({ACCOUNT: account});
-
     if (!account) {
       return new NextResponse(JSON.stringify("Account Type not found"), {
-        status: 200,
+        status: 404,
       });
     }
 
